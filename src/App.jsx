@@ -1,32 +1,20 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import './App.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; //allows us to create our SPA 
+import LandingPage from './components/LandingPage';
+import HeatingWalkthrough from './components/HeatingWalkthrough';
+import VentilationWalkthrough from './components/VentilationWalkthrough';
+import AirConditioningWalkthrough from './components/AirConditioningWalkthrough';
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [data, setData] = useState(null)
-
-  useEffect(() => {
-    axios.get('http://localhost:3001/api/data')
-      .then(response => {
-        setData(response.data)
-      })
-      .catch(error => {
-        console.error('There was an error fetching the data!', error)
-      })
-  }, [])
-
   return (
-    <div>
-      <h1>Vite + React</h1>
-      <div>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      {data && <div>Data from backend: {JSON.stringify(data)}</div>}
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/heating" element={<HeatingWalkthrough />} />
+        <Route path="/ventilation" element={<VentilationWalkthrough />} />
+        <Route path="/air-conditioning" element={<AirConditioningWalkthrough />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
