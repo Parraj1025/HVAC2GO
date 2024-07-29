@@ -1,7 +1,8 @@
+require('dotenv').config(); // Load environment variables
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import the cors package
-require('dotenv').config(); // Load environment variables
+
 
 const app = express();
 const port = 3001;
