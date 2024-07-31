@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; //allows us to create our SPA 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; //allows us to create our SPA  with multiple views and enables navigation between these views without refreshing the entire page.
 import LandingPage from './components/LandingPage';
 import HeatingWalkthrough from './components/HeatingWalkthrough';
 import VentilationWalkthrough from './components/VentilationWalkthrough';

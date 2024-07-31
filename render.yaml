@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: hvac-app
+    env: node
+    plan: free
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_USER
+        fromDatabase:
+          name: hvac-db
+          property: username
+      - key: MONGO_PASSWORD
+        fromDatabase:
+          name: hvac-db
+          property: password
+      - key: MONGO_DB
+        value: Explorify
+      - key: MONGO_HOST
+        fromDatabase:
+          name: hvac-db
+          property: host
+      - key: MONGO_PORT
+        fromDatabase:
+          name: hvac-db
+          property: port
+
+databases:
+  - name: hvac-db
+    plan: free
+    databaseName: Explorify
+    user: sylo777
