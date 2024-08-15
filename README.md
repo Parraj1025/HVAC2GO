@@ -1,8 +1,28 @@
-# React + Vite
+# HVAG2GO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  Currently Under Development
 
-Currently, two official plugins are available:
+  Render URL: [view app](https://hvac2go.onrender.com/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Description
+    This app is meant to capture the market and qualify leads for service leads
+    
+## Installation
+    npm i
+    
+## Usage
+    The app walks you through basic diagnostic steps that would usually warrant a service call. 
+    Customer is able to request help at any time which prompts them to fill out a form which collects their data for compiling the lead.
+    Customer is prompted to sign in or register. Once they are logged in they are able to see status information.
+    They are able to create a new appointment (videoCall/Service call)
+    Customer is prompted to pay and once payment is accepted it dispatches to technician side
+    Technician is able to sign in and see available lead. Once they select the lead they can dial out and "collect a lead" this updates the status on the customer side and technician side
+## Contributions 
+    Juan Parra (2024)
+    Edwin Rivera (2024)
+    Anthony Bell (2024)
+    Maria Roa (2024)
+    
+## Questions:
+[Link to Github profile](https://github.com/Parraj1025)
+    

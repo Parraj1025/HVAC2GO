@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import collectData from './postdata';
 
 function Form() {
-  const [formData, setFormData] = useState({ name: '', email: '', phoneNumber: '' });
+  const [formData, setFormData] = useState({ first_name: '', last_name: '', email: '', phoneNumber: '', address:'', state:'', city:'',zip:'' });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
