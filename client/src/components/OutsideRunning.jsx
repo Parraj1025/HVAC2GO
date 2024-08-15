@@ -23,7 +23,7 @@ function OutsideRunning(){
                 Check inside blower motot for operation status (if you cant hear it running. Follow video for inspection)
             </li>
             <div><iframe width="560" height="315" src="https://www.youtube.com/embed/glFsL73YmNU?si=lg4clAEQ1bmct3Ea" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-            <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={()=> navigate('/form')}> HELP ME</button>
+            <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={()=> navigate('/connect-technician')}> HELP ME</button>
             <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={()=> navigate('/air-conditioning/diag')}> Start Over</button>
             </p>
       </motion.div>

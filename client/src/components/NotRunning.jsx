@@ -20,7 +20,7 @@ function NotRunning(){
         </li>
         <div>
         <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/air-conditioning/Float')}> Float Switch Wet </button>
-        <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/form')} > Help Me </button>
+        <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/connect-technician')} > Help Me </button>
         <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/air-conditioning/diag')}> Go Back </button>
         </div>
         </p>

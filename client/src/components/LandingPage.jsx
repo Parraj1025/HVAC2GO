@@ -13,7 +13,15 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-  
+      <nav className="navbar">
+        <div>
+          <Link to="/" className="text-white text-lg font-bold">Home</Link>
+        </div>
+        <div>
+          <Link to="/login" className="text-white mx-2">Login</Link>
+          <Link to="/register" className="text-white mx-2">Register</Link>
+        </div>
+      </nav>
 
       <div className="content-wrapper">
         <div className="logo-container">
@@ -24,7 +32,7 @@ const LandingPage = () => {
           initial={{ x: -1000 }}
           animate={{ x: 0 }}
           transition={{ duration: 1 }}
-          className="text-center"
+          className="text-center bg-white p-8 rounded-lg shadow-lg"
         >
           <motion.h1
             initial={{ x: -1000 }}
@@ -39,11 +47,11 @@ const LandingPage = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
-              className="mt-8"
+              className="mt-4"
             >
               <button
                 onClick={() => navigate('/air-conditioning/diag')}
-                className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700"
+                className="px-6 py-3 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700 transition-colors duration-200 z-10"
               >
                 GET STARTED
               </button>

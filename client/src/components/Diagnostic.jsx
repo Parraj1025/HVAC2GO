@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 function Diagnostic(){
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     return (
         <motion.div
         initial={{ opacity: 0 }}
@@ -17,18 +17,11 @@ function Diagnostic(){
         <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/air-conditioning/diag2')}>NOT RUNNING AT ALL</button>
         <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/air-conditioning/diag3')}>ONLY INSIDE RUNNING</button>
         <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/air-conditioning/diag4')}>ONLY OUTSIDE RUNNING</button>
+        <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/connect-technician')}>Help Me</button>
         </p>
         
       </motion.div>
     );
 };
 
-
-
 export default Diagnostic;
-
-
-
-
-
-

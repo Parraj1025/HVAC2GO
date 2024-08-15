@@ -18,7 +18,7 @@ function FloatSwitch(){
         <h2> CLEARING YOUR DRAIN LINE
             <div><iframe width="560" height="315" src="https://www.youtube.com/embed/4a4GTQXNnQA?si=C5lHuhmWAagmSBFq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         </h2>
-        <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/form')}>Help Me</button>
+        <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/connect-technician')}>Help Me</button>
         <button className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700" onClick={() => navigate('/air-conditioning/diag')}>Start Over</button>
         </p>
         
