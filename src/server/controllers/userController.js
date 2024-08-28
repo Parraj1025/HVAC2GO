@@ -1,3 +1,4 @@
+//userController.js
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -136,3 +137,4 @@ export const deleteUserById = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
