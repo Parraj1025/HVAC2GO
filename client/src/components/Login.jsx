@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
 import './Auth.css'; // Import the CSS file
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,13 +19,7 @@ const Login = ({ setIsAuthenticated }) => {
       const token = response.data.token;
       localStorage.setItem('token', token);
       setMessage('Login successful');
-      setIsAuthenticated(true);
-
-      // Redirect to the intended page or home
-      const redirectTo = location.state?.from || '/';
-      setTimeout(() => {
-        navigate(redirectTo);
-      }, 2000);
+      navigate('/');
     } catch (error) {
       setMessage(error.response.data.message || 'Login failed');
     }

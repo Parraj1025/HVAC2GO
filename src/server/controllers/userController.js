@@ -69,51 +69,15 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// Get all users (protected route)
-export const getUsers = async (req, res) => {
+export const getCurrentUser = async (req, res) => {
   try {
-    const users = await User.find().select('-password');
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-// Get a single user by ID (protected route)
-export const getUserById = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id).select('-password');
+    const user = await User.findById(req.user.id).select('-password');
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ message: 'User not found' });
     }
     res.status(200).json(user);
   } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-// Update a user by ID (protected route)
-export const updateUserById = async (req, res) => {
-  try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true }).select('-password');
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-// Delete a user by ID (protected route)
-export const deleteUserById = async (req, res) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-    res.status(200).json({ message: 'User deleted successfully' });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error("Error fetching user data:", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };

@@ -2,14 +2,34 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import Wave from './Wave'; // Ensure you import the Wave component
+import axios from 'axios';
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const [isTextVisible, setTextVisible] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     setTimeout(() => setTextVisible(true), 500);
+
+    // Check if user is logged in
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios.get('/api/users/me', { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => {
+          setUser(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching user data', error);
+        });
+    }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setUser(null);
+    navigate('/');
+  };
 
   return (
     <div className="landing-page">
@@ -18,8 +38,17 @@ const LandingPage = () => {
           <Link to="/" className="text-white text-lg font-bold">Home</Link>
         </div>
         <div>
-          <Link to="/login" className="text-white mx-2">Login</Link>
-          <Link to="/register" className="text-white mx-2">Register</Link>
+          {user ? (
+            <>
+              <span className="text-white mx-2">{user.name}</span>
+              <button onClick={handleLogout} className="text-white mx-2">Logout</button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="text-white mx-2">Login</Link>
+              <Link to="/register" className="text-white mx-2">Register</Link>
+            </>
+          )}
         </div>
       </nav>
 
@@ -51,7 +80,7 @@ const LandingPage = () => {
             >
               <button
                 onClick={() => navigate('/air-conditioning/diag')}
-                className="px-6 py-3 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700 transition-colors duration-200 z-10"
+                className="px-6 py-3 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700 transition-colors duration-200"
               >
                 GET STARTED
               </button>
