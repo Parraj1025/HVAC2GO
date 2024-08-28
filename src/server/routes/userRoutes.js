@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerUser, loginUser, getUsers, getUserById, updateUserById, deleteUserById, getCurrentUser } from '../controllers/userController.js';
+import { registerUser, loginUser, getUsers, getUserById, updateUserById, deleteUserById } from '../controllers/userController.js';
 import auth from '../middleware/auth.js';
 
 const router = express.Router();
@@ -14,5 +14,6 @@ router.get('/users/:id', auth, getUserById);
 router.put('/users/:id', auth, updateUserById);
 router.delete('/users/:id', auth, deleteUserById);
 router.get('/users/me', auth, getCurrentUser);
+
 
 export default router;
