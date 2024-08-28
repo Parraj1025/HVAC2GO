@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import Wave from './Wave'; // Ensure you import the Wave component
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -40,7 +42,10 @@ const LandingPage = () => {
         <div>
           {user ? (
             <>
-              <span className="text-white mx-2">{user.name}</span>
+              <span className="text-white mx-2 flex items-center">
+                <FontAwesomeIcon icon={faUser} className="mr-2" />
+                {user.name}
+              </span>
               <button onClick={handleLogout} className="text-white mx-2">Logout</button>
             </>
           ) : (
