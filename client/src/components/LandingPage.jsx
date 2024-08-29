@@ -26,6 +26,8 @@ const LandingPage = () => {
         })
         .catch(error => {
           console.error('Error fetching user data', error);
+          // If there's an error, remove the token to ensure the user is logged out
+          localStorage.removeItem('token');
         });
     }
   }, []);
