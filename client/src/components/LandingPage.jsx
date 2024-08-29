@@ -1,3 +1,4 @@
+// src/components/LandingPage.jsx
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
@@ -5,11 +6,13 @@ import Wave from './Wave'; // Ensure you import the Wave component
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import Select from 'react-select';
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const [isTextVisible, setTextVisible] = useState(false);
   const [user, setUser] = useState(null);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setTextVisible(true), 500);
@@ -33,6 +36,19 @@ const LandingPage = () => {
     navigate('/');
   };
 
+  const dropdownOptions = [
+    { value: 'dashboard', label: 'Dashboard' },
+    { value: 'logout', label: 'Logout' }
+  ];
+
+  const handleDropdownChange = (selectedOption) => {
+    if (selectedOption.value === 'dashboard') {
+      navigate('/dashboard');
+    } else if (selectedOption.value === 'logout') {
+      handleLogout();
+    }
+  };
+
   return (
     <div className="landing-page">
       <nav className="navbar">
@@ -41,13 +57,35 @@ const LandingPage = () => {
         </div>
         <div>
           {user ? (
-            <>
-              <span className="text-white mx-2 flex items-center">
+            <div className="relative">
+              <button onClick={() => setDropdownOpen(!isDropdownOpen)} className="text-white mx-2 flex items-center focus:outline-none">
                 <FontAwesomeIcon icon={faUser} className="mr-2" />
                 {user.name}
-              </span>
-              <button onClick={handleLogout} className="text-white mx-2">Logout</button>
-            </>
+              </button>
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                  <Select
+                    options={dropdownOptions}
+                    onChange={handleDropdownChange}
+                    menuIsOpen={true}
+                    styles={{
+                      control: (provided) => ({ ...provided, display: 'none' }),
+                      menu: (provided) => ({ ...provided, position: 'static', boxShadow: 'none', border: 'none' }),
+                      option: (provided, state) => ({
+                        ...provided,
+                        color: state.isSelected ? 'white' : 'black',
+                        backgroundColor: state.isSelected ? '#38b2ac' : 'white',
+                        padding: '10px 20px',
+                        cursor: 'pointer',
+                        '&:hover': {
+                          backgroundColor: '#f0f0f0',
+                        },
+                      }),
+                    }}
+                  />
+                </div>
+              )}
+            </div>
           ) : (
             <>
               <Link to="/login" className="text-white mx-2">Login</Link>
