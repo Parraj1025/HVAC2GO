@@ -1,3 +1,4 @@
+// src/App.jsx
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import Diagnostic from './components/Diagnostic';
@@ -8,6 +9,7 @@ import FloatSwitch from './components/FloatSwitch';
 import Form from './components/Form';
 import Login from './components/Login'; // Ensure you import the Login component
 import Register from './components/Register'; // Ensure you import the Register component
+import ConnectTechnician from './components/ConnectTechnician'; // Import the ConnectTechnician component
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path='/form' element={<Form/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/connect-technician" element={<ConnectTechnician />} /> {/* Add this route */}
       </Routes>
     </Router>
   );

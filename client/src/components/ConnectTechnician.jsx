@@ -1,16 +1,31 @@
+// src/components/ConnectTechnician.jsx
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const ConnectTechnician = () => {
   const [isTextVisible, setTextVisible] = useState(false);
   const [paidFor, setPaidFor] = useState(false);
+  const [orderID, setOrderID] = useState(null);
 
   useEffect(() => {
     setTimeout(() => setTextVisible(true), 500);
 
+    // Create PayPal order
+    const createOrder = async () => {
+      try {
+        const response = await axios.post('/api/create-order', { amount: '49.99' });
+        setOrderID(response.data.id);
+      } catch (error) {
+        console.error('Error creating PayPal order:', error);
+      }
+    };
+
+    createOrder();
+
     // Load PayPal script
     const script = document.createElement('script');
-    script.src = "https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID";
+    script.src = `https://www.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}`;
     script.addEventListener('load', () => {
       window.paypal.Buttons({
         createOrder: (data, actions) => {
@@ -51,9 +66,74 @@ const ConnectTechnician = () => {
 
       {/* Payment Form */}
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Fill out this form and make a one-time payment to connect to a Technician</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Add your payment details here</h2>
         {/* Billing Address Fields */}
-        {/* ... (existing form fields) */}
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+            Name
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="name"
+            type="text"
+            placeholder="Name"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            Email
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            type="email"
+            placeholder="Email"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+            Address
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="address"
+            type="text"
+            placeholder="Address"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="city">
+            City
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="city"
+            type="text"
+            placeholder="City"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="state">
+            State
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="state"
+            type="text"
+            placeholder="State"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="zip">
+            Zip
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="zip"
+            type="text"
+            placeholder="Zip"
+          />
+        </div>
 
         {/* PayPal Payment Option */}
         <div className="mt-8 text-center">

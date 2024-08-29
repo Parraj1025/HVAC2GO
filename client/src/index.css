@@ -164,3 +164,29 @@ input:focus {
   border-color: #38b2ac;
   outline: none;
 }
+/* Ensure the form container has a background color */
+.form-container {
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form input styles */
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+.paypal-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
