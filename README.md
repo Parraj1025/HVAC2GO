@@ -35,10 +35,10 @@ This application is designed to assist customers in diagnosing their HVAC units 
 
 
 
-License
+## License
 This application is proprietary software. All rights are reserved by the developers and the organization. Unauthorized copying, modification, or distribution is strictly prohibited.
 
-Contact
+## Contact
 For any inquiries or support, please contact our team at support@hvac2go.com.
 ## Contributions 
     Juan Parra (2024)
