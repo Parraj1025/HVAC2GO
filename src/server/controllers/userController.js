@@ -1,4 +1,3 @@
-// userController.js
 import User from '../models/User.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -79,61 +78,6 @@ export const getCurrentUser = async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.error("Error fetching user data:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const getUsers = async (req, res) => {
-  try {
-    const users = await User.find().select('-password');
-    res.status(200).json(users);
-  } catch (error) {
-    console.error("Error fetching users:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const getUserById = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id).select('-password');
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.status(200).json(user);
-  } catch (error) {
-    console.error("Error fetching user by ID:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const updateUserById = async (req, res) => {
-  try {
-    const { name, email, phoneNumber } = req.body;
-    const user = await User.findByIdAndUpdate(
-      req.params.id,
-      { name, email, phoneNumber },
-      { new: true }
-    ).select('-password');
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.status(200).json(user);
-  } catch (error) {
-    console.error("Error updating user by ID:", error.message);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-export const deleteUserById = async (req, res) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    res.status(200).json({ message: 'User deleted successfully' });
-  } catch (error) {
-    console.error("Error deleting user by ID:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
