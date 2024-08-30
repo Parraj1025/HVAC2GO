@@ -22,7 +22,7 @@ This application is designed to assist customers in diagnosing their HVAC units 
 - **Backend**: Node.js, Express, MongoDB, Mongoose
 - **Payment Processing**: PayPal SDK
 - **Video Conferencing**: Zoom, Google Meet
-- **Authentication**: JSON Web Tokens (JWT)
+- **Authentication**: JSON Web Tokens (JWT), Cors, Bcrypt
 - **Deployment**: Vite, Render
 
 ## Getting Started
