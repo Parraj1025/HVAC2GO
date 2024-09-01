@@ -1,5 +1,5 @@
 // src/components/LandingPage.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import Wave from './Wave'; // Ensure you import the Wave component
@@ -13,6 +13,7 @@ const LandingPage = () => {
   const [isTextVisible, setTextVisible] = useState(false);
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     setTimeout(() => setTextVisible(true), 500);
@@ -31,6 +32,19 @@ const LandingPage = () => {
         });
     }
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -59,7 +73,7 @@ const LandingPage = () => {
         </div>
         <div>
           {user ? (
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <button onClick={() => setDropdownOpen(!isDropdownOpen)} className="text-white mx-2 flex items-center focus:outline-none">
                 <FontAwesomeIcon icon={faUser} className="mr-2" />
                 {user.name}
