@@ -2,8 +2,18 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 function FloatSwitch(){
-    const navigate = useNavigate()
-    return (
+  const navigate = useNavigate();
+
+  const handleHelpMeClick = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/form');
+    } else {
+      navigate('/prompt-signup');
+    }
+  };
+
+  return (
         <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
