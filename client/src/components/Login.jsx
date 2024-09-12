@@ -1,5 +1,4 @@
 // src/components/Login.jsx
-// src/components/Login.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -10,6 +9,8 @@ const Login = () => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -17,7 +18,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/login', formData);
+      const response = await axios.post(`${apiUrl}/api/login`, formData);
       const token = response.data.token;
       localStorage.setItem('token', token);
       setMessage('Login successful');
