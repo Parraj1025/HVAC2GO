@@ -9,7 +9,6 @@ import FloatSwitch from './components/FloatSwitch';
 import Login from './components/Login'; 
 import Register from './components/Register'; 
 import ConnectTechnician from './components/ConnectTechnician'; 
-import PromptSignUp from './components/PromptSignUp';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
         <Route path='/air-conditioning/Float' element={<FloatSwitch />}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/prompt-signup" element={<PromptSignUp />} /> {/* Add this route */}
+
         <Route 
           path="/connect-technician" 
           element={
