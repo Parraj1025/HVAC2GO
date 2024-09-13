@@ -8,7 +8,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-
+  //imports url using env variables based on whether were in a local or prod environment
   const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {

@@ -185,10 +185,5 @@ input:focus {
   box-sizing: border-box;
   font-size: 1rem;
 }
-.paypal-buttons {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
+
 
