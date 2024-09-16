@@ -1,4 +1,3 @@
-// src/components/ConnectTechnician.jsx
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
@@ -12,38 +11,47 @@ const ConnectTechnician = () => {
     setTimeout(() => setTextVisible(true), 500);
 
     const loadPayPalScript = () => {
-      // Check if the PayPal script is already loaded
-      if (document.querySelector('#paypal-script')) return;
+      if (document.querySelector('#paypal-script')) return; // Prevent loading multiple times
 
       const script = document.createElement('script');
       script.id = 'paypal-script';
-      script.src = `https://www.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}`;
-      script.addEventListener('load', () => {
+      script.src = `https://www.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&currency=USD`;
+      script.async = true;
+
+      script.onload = () => {
         window.paypal.Buttons({
           createOrder: async (data, actions) => {
+            console.log('Creating order...');
             try {
               const response = await axios.post('/api/create-order', { amount: '49.99' });
-              setOrderID(response.data.id);
-              return response.data.id;
+              console.log('Response:', response.data);
+              if (response && response.data && response.data.id) {
+                setOrderID(response.data.id);
+                return response.data.id; // Return the order ID
+              } else {
+                throw new Error('Order ID not received');
+              }
             } catch (error) {
-              console.error('Error creating PayPal order:', error);
+              console.error('Axios Error:', error.response ? error.response.data : error.message);
+              alert('There was an issue creating the PayPal order. Please try again.');
             }
           },
           onApprove: async (data, actions) => {
             try {
-              const order = await actions.order.capture();
+              const order = await actions.order.capture(); // Capture the order
               setPaidFor(true);
               console.log('Payment successful:', order);
             } catch (error) {
-              console.error('Error capturing order:', error);
+              console.error('Error capturing PayPal order:', error);
             }
           },
           onError: (err) => {
             console.error('PayPal Button Error:', err);
           }
-        }).render('#paypal-button-container');
-      });
-      document.body.appendChild(script);
+        }).render('#paypal-button-container'); // Render buttons
+      };
+
+      document.body.appendChild(script); // Append script to body
     };
 
     loadPayPalScript();
@@ -89,7 +97,7 @@ const ConnectTechnician = () => {
               placeholder="Email"
             />
           </div>
-          {/* Add other fields here */}
+
           {/* PayPal Payment Option */}
           <div className="mt-6 text-center">
             <p className="text-lg font-medium text-gray-800 mb-4">Pay with PayPal</p>
