@@ -9,36 +9,53 @@ import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 
+const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+// Middleware for CORS (allow access from client-side domains and PayPal)
 app.use(cors({
   origin: [
-    'http://localhost:5173', 
-    'https://hvac2go.onrender.com', 
-    'https://www.paypal.com', 
-    'https://sandbox.paypal.com',
+    'http://localhost:5173',   // Local development
+    'https://hvac2go.onrender.com',  // Production app
+    'https://www.paypal.com',   // PayPal production
+    'https://sandbox.paypal.com',  // PayPal sandbox for testing
   ],
   credentials: true,
 }));
 
 // Apply security headers using helmet
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com'],
-    scriptSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com', "'unsafe-inline'", "'unsafe-eval'"],
-    frameSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com'],
-    connectSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com', 'https://api-m.sandbox.paypal.com'],
-    imgSrc: ["'self'", 'data:', 'https://www.paypal.com', 'https://sandbox.paypal.com'],
-    styleSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com', "'unsafe-inline'"],
-    objectSrc: ["'none'"],
-    upgradeInsecureRequests: [],
-  }
-}));
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com'],
+      scriptSrc: [
+        "'self'",
+        'https://www.paypal.com',
+        'https://sandbox.paypal.com',
+        "'unsafe-inline'",
+        "'unsafe-eval'"
+      ],
+      frameSrc: ['https://www.paypal.com', 'https://sandbox.paypal.com'],
+      connectSrc: [
+        "'self'",
+        'https://www.paypal.com',
+        'https://sandbox.paypal.com',
+        'https://api-m.sandbox.paypal.com',
+      ],
+      imgSrc: ["'self'", 'data:', 'https://www.paypal.com', 'https://sandbox.paypal.com'],
+      styleSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com', "'unsafe-inline'"],
+    }
+  })
+);
 
-// Connect to MongoDB
+
+// Parse incoming requests with JSON payloads
+app.use(express.json());
+
+// MongoDB connection
 mongoose.connect(MONGO_CONNECTION_STRING)
   .then(() => {
     console.log('Connected to MongoDB');
@@ -47,16 +64,19 @@ mongoose.connect(MONGO_CONNECTION_STRING)
     });
   })
   .catch((err) => {
-    console.error('Mongo connection error:', err.message);
+    console.error('MongoDB connection error:', err.message);
   });
 
-// API routes
+
+// Serve user-related API routes
 app.use('/api', userRoutes);
 
-// Serve static files
+// Serve static files from the "dist" directory (React production build)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, '../../client/dist')));
 
-// Serve the React app
+// Fallback: serve React app for any route not handled by the API
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/dist', 'index.html'));
 });
