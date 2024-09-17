@@ -1,44 +1,39 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 
 const ConnectTechnician = () => {
   const [isTextVisible, setTextVisible] = useState(false);
   const [paidFor, setPaidFor] = useState(false);
-  const [orderID, setOrderID] = useState(null);
-
+  
   useEffect(() => {
     setTimeout(() => setTextVisible(true), 500);
 
+    // Load PayPal SDK script with client-id
     const loadPayPalScript = () => {
-      if (document.querySelector('#paypal-script')) return; // Prevent loading multiple times
+      if (document.querySelector('#paypal-script')) return; // Prevent multiple script loads
 
       const script = document.createElement('script');
       script.id = 'paypal-script';
-      script.src = `https://www.paypal.com/sdk/js?client-id=${import.meta.env.VITE_PAYPAL_CLIENT_ID}&currency=USD`;
+      script.src = `https://sandbox.paypal.com/sdk/js?client-id=AYpoudfs0P962wsDsbyyu-jugWmssnqwwRoIjiRc4wOxgQdxxK4Dj0N7D0bNcvwKj7TZiUFa2RXL5Egp&currency=USD`;
       script.async = true;
 
       script.onload = () => {
         window.paypal.Buttons({
-          createOrder: async (data, actions) => {
-            console.log('Creating order...');
-            try {
-              const response = await axios.post('/api/create-order', { amount: '49.99' });
-              console.log('Response:', response.data);
-              if (response && response.data && response.data.id) {
-                setOrderID(response.data.id);
-                return response.data.id; // Return the order ID
-              } else {
-                throw new Error('Order ID not received');
-              }
-            } catch (error) {
-              console.error('Axios Error:', error.response ? error.response.data : error.message);
-              alert('There was an issue creating the PayPal order. Please try again.');
-            }
+          // Create order directly on the client-side
+          createOrder: (data, actions) => {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: '49.99', 
+                  currency_code: 'USD'
+                }
+              }]
+            });
           },
+          // Capture the order once approved
           onApprove: async (data, actions) => {
             try {
-              const order = await actions.order.capture(); // Capture the order
+              const order = await actions.order.capture();
               setPaidFor(true);
               console.log('Payment successful:', order);
             } catch (error) {
@@ -48,10 +43,10 @@ const ConnectTechnician = () => {
           onError: (err) => {
             console.error('PayPal Button Error:', err);
           }
-        }).render('#paypal-button-container'); // Render buttons
+        }).render('#paypal-button-container'); // Render PayPal button
       };
 
-      document.body.appendChild(script); // Append script to body
+      document.body.appendChild(script); // Append PayPal script to the body
     };
 
     loadPayPalScript();
@@ -98,7 +93,7 @@ const ConnectTechnician = () => {
             />
           </div>
 
-          {/* PayPal Payment Option */}
+          {/* PayPal Payment Button */}
           <div className="mt-6 text-center">
             <p className="text-lg font-medium text-gray-800 mb-4">Pay with PayPal</p>
             <div id="paypal-button-container" className="mx-auto"></div>
