@@ -9,7 +9,6 @@ import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 
-const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 const MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
 
 const app = express();
@@ -27,7 +26,6 @@ app.use(cors({
 }));
 
 // Apply security headers using helmet
-// Apply security headers using helmet
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -36,20 +34,36 @@ app.use(
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
-        'https://www.sandbox.paypal.com/sdk/js',  // Explicitly allow the PayPal SDK
         "'unsafe-inline'",
-        "'unsafe-eval'",
+        "'unsafe-eval'"
       ],
-      frameSrc: ['https://www.paypal.com', 'https://sandbox.paypal.com'],
+      frameSrc: [
+        'https://www.paypal.com',
+        'https://sandbox.paypal.com',
+      ],
       connectSrc: [
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
         'https://api-m.sandbox.paypal.com',
+        'https://www.paypalobjects.com',  // Allow connections to PayPal objects
+        'https://www.sandbox.paypal.com', // Allow sandbox connections
       ],
-      imgSrc: ["'self'", 'data:', 'https://www.paypal.com', 'https://sandbox.paypal.com'],
-      styleSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com', "'unsafe-inline'"],
-    },
+      imgSrc: [
+        "'self'", 
+        'data:', 
+        'https://www.paypal.com', 
+        'https://sandbox.paypal.com',
+        'https://www.paypalobjects.com',  // Add PayPal images CDN
+      ],
+      styleSrc: [
+        "'self'", 
+        'https://www.paypal.com', 
+        'https://sandbox.paypal.com', 
+        "'unsafe-inline'"
+      ],
+      objectSrc: ["'none'"],
+    }
   })
 );
 
@@ -68,7 +82,6 @@ mongoose.connect(MONGO_CONNECTION_STRING)
     console.error('MongoDB connection error:', err.message);
   });
 
-
 // Serve user-related API routes
 app.use('/api', userRoutes);
 
@@ -77,7 +90,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, '../../client/dist')));
 
-// Fallback: serve React app for any route not handled by the API
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../client/dist', 'index.html'));
 });
