@@ -27,6 +27,7 @@ app.use(cors({
 }));
 
 // Apply security headers using helmet
+// Apply security headers using helmet
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -35,8 +36,9 @@ app.use(
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
+        'https://www.sandbox.paypal.com/sdk/js',  // Explicitly allow the PayPal SDK
         "'unsafe-inline'",
-        "'unsafe-eval'"
+        "'unsafe-eval'",
       ],
       frameSrc: ['https://www.paypal.com', 'https://sandbox.paypal.com'],
       connectSrc: [
@@ -47,10 +49,9 @@ app.use(
       ],
       imgSrc: ["'self'", 'data:', 'https://www.paypal.com', 'https://sandbox.paypal.com'],
       styleSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com', "'unsafe-inline'"],
-    }
+    },
   })
 );
-
 
 // Parse incoming requests with JSON payloads
 app.use(express.json());
