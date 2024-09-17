@@ -34,7 +34,9 @@ app.use(
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
+        'https://www.sandbox.paypal.com/sdk/js',  // Explicitly allow the PayPal SDK
         "'unsafe-inline'",
+        "'unsafe-eval'",
         "'unsafe-eval'"
       ],
       frameSrc: [
