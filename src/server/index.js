@@ -26,6 +26,7 @@ app.use(cors({
 }));
 
 // Apply security headers using helmet
+// Apply security headers using helmet
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -36,6 +37,11 @@ app.use(
         'https://sandbox.paypal.com',
         'https://www.sandbox.paypal.com/sdk/js',  // Explicitly allow the PayPal SDK
         "'unsafe-inline'",  // Necessary for inline scripts PayPal may use
+        "blob:",            // Allow blob URLs for workers
+      ],
+      workerSrc: [
+        "'self'",
+        "blob:"  // Allow workers to run from blob URLs
       ],
       frameSrc: [
         'https://www.paypal.com',
@@ -66,6 +72,7 @@ app.use(
     }
   })
 );
+
 
 // Parse incoming requests with JSON payloads
 app.use(express.json());
