@@ -17,8 +17,8 @@ const port = process.env.PORT || 3000;
 // Middleware for CORS (allow access from client-side domains and PayPal)
 app.use(cors({
   origin: [
-    'http://localhost:5173',   // Local development
-    'https://hvac2go.onrender.com',  // Production app
+    'http://localhost:5173',   
+    'https://hvac2go.onrender.com',  
     'https://www.paypal.com',   // PayPal production
     'https://sandbox.paypal.com',  // PayPal sandbox for testing
   ],
@@ -35,9 +35,7 @@ app.use(
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
         'https://www.sandbox.paypal.com/sdk/js',  // Explicitly allow the PayPal SDK
-        "'unsafe-inline'",
-        "'unsafe-eval'",
-        "'unsafe-eval'"
+        "'unsafe-inline'",  // Necessary for inline scripts PayPal may use
       ],
       frameSrc: [
         'https://www.paypal.com',
