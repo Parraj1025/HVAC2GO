@@ -26,35 +26,43 @@ app.use(cors({
 }));
 
 // Apply security headers using helmet
-// Apply security headers using helmet
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
+      // Allow self and PayPal's production and sandbox URLs
       defaultSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com'],
+
+      // Allow PayPal SDK and inline scripts
       scriptSrc: [
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
-        'https://www.sandbox.paypal.com/sdk/js',  // Explicitly allow the PayPal SDK
+        'https://www.sandbox.paypal.com/sdk/js',  // Allow PayPal SDK
         "'unsafe-inline'",  // Necessary for inline scripts PayPal may use
-        "blob:",            // Allow blob URLs for workers
+        "blob:"  // Allow blob URLs for workers
       ],
-      workerSrc: [
-        "'self'",
-        "blob:"  // Allow workers to run from blob URLs
-      ],
+
+      // Allow workers to run from blob URLs
+      workerSrc: ["'self'", "blob:"],
+
+      // Ensure the PayPal sandbox iframe can load
       frameSrc: [
+        "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
       ],
+
+      // Allow connections to PayPal APIs and other necessary URLs
       connectSrc: [
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
         'https://api-m.sandbox.paypal.com',
-        'https://www.paypalobjects.com',  // Allow connections to PayPal objects
-        'https://www.sandbox.paypal.com', // Allow sandbox connections
+        'https://www.paypalobjects.com',  // Allow PayPal objects
+        'https://www.sandbox.paypal.com'  // Allow sandbox connections
       ],
+
+      // Allow images from data URLs and PayPal-related domains
       imgSrc: [
         "'self'", 
         'data:', 
@@ -62,16 +70,21 @@ app.use(
         'https://sandbox.paypal.com',
         'https://www.paypalobjects.com',  // Add PayPal images CDN
       ],
+
+      // Allow inline styles (if required)
       styleSrc: [
         "'self'", 
         'https://www.paypal.com', 
         'https://sandbox.paypal.com', 
         "'unsafe-inline'"
       ],
+
+      // Block object embeddings
       objectSrc: ["'none'"],
-    }
+    },
   })
 );
+
 
 
 // Parse incoming requests with JSON payloads
