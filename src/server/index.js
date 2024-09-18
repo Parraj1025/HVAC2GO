@@ -29,61 +29,45 @@ app.use(cors({
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      // Allow self and PayPal's production and sandbox URLs
-      defaultSrc: ["'self'", 'https://www.paypal.com', 'https://sandbox.paypal.com'],
-
-      // Allow PayPal SDK and inline scripts
+      defaultSrc: ["'self'"],
       scriptSrc: [
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
-        'https://www.sandbox.paypal.com/sdk/js',  // Allow PayPal SDK
-        "'unsafe-inline'",  // Necessary for inline scripts PayPal may use
-        "blob:"  // Allow blob URLs for workers
+        'https://www.sandbox.paypal.com/sdk/js',
+        "'unsafe-inline'",
+        "blob:"
       ],
-
-      // Allow workers to run from blob URLs
       workerSrc: ["'self'", "blob:"],
-
-      // Ensure the PayPal sandbox iframe can load
       frameSrc: [
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
+        'https://www.sandbox.paypal.com/smart/buttons', 
       ],
-
-      // Allow connections to PayPal APIs and other necessary URLs
       connectSrc: [
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
         'https://api-m.sandbox.paypal.com',
-        'https://www.paypalobjects.com',  // Allow PayPal objects
-        'https://www.sandbox.paypal.com'  // Allow sandbox connections
+        'https://www.paypalobjects.com',
       ],
-
-      // Allow images from data URLs and PayPal-related domains
       imgSrc: [
         "'self'", 
         'data:', 
         'https://www.paypal.com', 
         'https://sandbox.paypal.com',
-        'https://www.paypalobjects.com',  // Add PayPal images CDN
+        'https://www.paypalobjects.com',
       ],
-
-      // Allow inline styles (if required)
       styleSrc: [
         "'self'", 
-        'https://www.paypal.com', 
-        'https://sandbox.paypal.com', 
         "'unsafe-inline'"
       ],
-
-      // Block object embeddings
       objectSrc: ["'none'"],
     },
   })
 );
+
 
 
 
