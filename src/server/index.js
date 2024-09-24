@@ -43,6 +43,7 @@ app.use(
         "'self'",
         'https://www.paypal.com',
         'https://sandbox.paypal.com',
+        'https://www.youtube.com', 
         'https://www.sandbox.paypal.com/smart/buttons', 
       ],
       connectSrc: [
