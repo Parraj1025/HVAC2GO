@@ -10,6 +10,7 @@ function Diagnostic() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [showButtons, setShowButtons] = useState(false); // Updated state to control button display
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -57,6 +58,11 @@ function Diagnostic() {
     }
   };
 
+  // Function to toggle showing the buttons instead of the initial content
+  const showDiagnosticOptions = () => {
+    setShowButtons(true);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -65,10 +71,10 @@ function Diagnostic() {
       className="flex flex-col justify-center items-center min-h-screen p-8 relative"
     >
       {/* Navigation Bar */}
-      <nav className="navbar w-full flex justify-between items-center mb-8 py-2" style={{ height: '60px' }}> {/* Adjusted height */}
+      <nav className="navbar w-full flex justify-between items-center mb-8 py-2" style={{ height: '60px' }}>
         <div className="flex items-center">
           <Link to="/" className="text-white text-lg font-bold">Home</Link>
-          <img src="/images/hvacfan.png" alt="Logo" className="h-12 w-12 ml-4" /> {/* Logo size */}
+          <img src="/images/hvacfan.png" alt="Logo" className="h-12 w-12 ml-4" />
         </div>
         <div>
           {user ? (
@@ -119,33 +125,69 @@ function Diagnostic() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="bg-gradient-to-r from-black to-teal-500 border-4 border-gray-300 border-opacity-50 rounded-lg p-8"
-        style={{ maxWidth: '700px', width: '80%', height: '550px' }} 
+        style={{ maxWidth: '700px', width: '80%', height: '550px' }}
       >
-        <h1 className="text-4xl font-bold text-white mb-4 text-center">
-          Hi! Let's diagnose your HVAC unit
-        </h1>
-        <ul className="text-white text-lg space-y-2 list-disc list-inside">
-          <li>Check your breakers</li>
-          <li>Ensure air filters are clean and replaced regularly</li>
-          <li>Check that the vents are not blocked or obstructed by furniture</li>
-          <li>Inspect for any strange noises coming from the unit</li>
-          <li>Verify if the unit is leaking water or refrigerant</li>
-          <li>Ensure that your thermostat is set to the correct mode (cooling/heating)</li>
-          <li>Check operation status of thermostat, inside unit, and outside unit</li>
-        </ul>
-
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="mt-6 flex justify-center"
-        >
-          <div className="relative">
-            <span className="block w-20 h-20 text-white text-6xl">
-              &#10132; {/* Right-pointing white arrow */}
-            </span>
-          </div>
-        </motion.div>
+        {!showButtons ? (
+          <>
+            <h1 className="text-4xl font-bold text-white mb-4 text-center">
+              Hi! Let's diagnose your HVAC unit
+            </h1>
+            <ul className="text-white text-lg space-y-2 list-disc list-inside">
+              <li>Check your breakers</li>
+              <li>Ensure air filters are clean and replaced regularly</li>
+              <li>Check that the vents are not blocked or obstructed by furniture</li>
+              <li>Inspect for any strange noises coming from the unit</li>
+              <li>Verify if the unit is leaking water or refrigerant</li>
+              <li>Ensure that your thermostat is set to the correct mode (cooling/heating)</li>
+              <li>Check operation status of thermostat, inside unit, and outside unit</li>
+            </ul>
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              className="mt-6 flex justify-center cursor-pointer"
+              onClick={showDiagnosticOptions} // Trigger button view when clicked
+            >
+              <div className="relative">
+                <span className="block w-20 h-20 text-white text-6xl">
+                  &#10132; {/* Right-pointing white arrow */}
+                </span>
+              </div>
+            </motion.div>
+          </>
+        ) : (
+          <>
+            <h1 className="text-4xl font-bold text-white mb-4 text-center">
+              Is your HVAC unit running?
+            </h1>
+            <div className="flex flex-col space-y-4">
+              <button
+                className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700"
+                onClick={() => navigate('/air-conditioning/diag2')}
+              >
+                NOT RUNNING AT ALL
+              </button>
+              <button
+                className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700"
+                onClick={() => navigate('/air-conditioning/diag3')}
+              >
+                ONLY INSIDE RUNNING
+              </button>
+              <button
+                className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700"
+                onClick={() => navigate('/air-conditioning/diag4')}
+              >
+                ONLY OUTSIDE RUNNING
+              </button>
+              <button
+                className="px-4 py-2 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700"
+                onClick={() => navigate('/connect-technician')}
+              >
+                Help Me
+              </button>
+            </div>
+          </>
+        )}
       </motion.div>
     </motion.div>
   );

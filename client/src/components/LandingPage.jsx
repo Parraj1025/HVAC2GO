@@ -1,11 +1,10 @@
-// src/components/LandingPage.jsx
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import Wave from './Wave'; // Ensure you import the Wave component
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faTools, faVideo, faWrench, faArrowRight, faUser } from '@fortawesome/free-solid-svg-icons';
 import Select from 'react-select';
 
 const LandingPage = () => {
@@ -18,16 +17,15 @@ const LandingPage = () => {
   useEffect(() => {
     setTimeout(() => setTextVisible(true), 500);
 
-    // Check if user is logged in
     const token = localStorage.getItem('token');
     if (token) {
-      axios.get('/api/users/me', { headers: { Authorization: `Bearer ${token}` } })
-        .then(response => {
+      axios
+        .get('/api/users/me', { headers: { Authorization: `Bearer ${token}` } })
+        .then((response) => {
           setUser(response.data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error fetching user data', error);
-          // If there's an error, remove the token to ensure the user is logged out
           localStorage.removeItem('token');
         });
     }
@@ -54,7 +52,7 @@ const LandingPage = () => {
 
   const dropdownOptions = [
     { value: 'dashboard', label: 'Dashboard' },
-    { value: 'logout', label: 'Logout' }
+    { value: 'logout', label: 'Logout' },
   ];
 
   const handleDropdownChange = (selectedOption) => {
@@ -67,14 +65,23 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      <nav className="navbar">
-        <div>
-          <Link to="/" className="text-white text-lg font-bold">Home</Link>
-        </div>
+      <nav className="navbar flex items-center bg-gray-800 overflow-hidden" style={{ padding: '0.5rem 1rem', height: '60px' }}>
+       
+        <Link to="/" className="flex items-center">
+          <img
+            src="/images/officiallogo4.png"
+            alt="Logo"
+            className="h-24 max-h-full w-auto"
+            style={{ transform: 'translateY(10px)' }}  
+          />
+        </Link>
         <div>
           {user ? (
             <div className="relative" ref={dropdownRef}>
-              <button onClick={() => setDropdownOpen(!isDropdownOpen)} className="text-white mx-2 flex items-center focus:outline-none">
+              <button
+                onClick={() => setDropdownOpen(!isDropdownOpen)}
+                className="text-white mx-2 flex items-center focus:outline-none"
+              >
                 <FontAwesomeIcon icon={faUser} className="mr-2" />
                 {user.name}
               </button>
@@ -104,50 +111,69 @@ const LandingPage = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="text-white mx-2">Login</Link>
-              <Link to="/register" className="text-white mx-2">Register</Link>
+              <Link to="/login" className="text-white mx-2">
+                Login
+              </Link>
+              <Link to="/register" className="text-white mx-2">
+                Register
+              </Link>
             </>
           )}
         </div>
       </nav>
 
       <div className="content-wrapper">
-        <div className="logo-container">
-          <img src="/images/hvaclogo2.png" alt="Logo" className="logo" />
+        <div className="flex justify-center mt-10">
+          <img src="/images/hvaclogo2.png" alt="Logo" className="logo w-36 h-auto mb-4" />
         </div>
 
-        <motion.div
-          initial={{ x: -1000 }}
-          animate={{ x: 0 }}
-          transition={{ duration: 1 }}
-          className="text-center bg-white p-8 rounded-lg shadow-lg"
-        >
-          <motion.h1
-            initial={{ x: -1000 }}
-            animate={{ x: 0 }}
+        <div className="flex items-center justify-center h-screen">
+          <motion.div
+            className="bg-gradient-to-r from-black to-teal-500 p-6 rounded-lg shadow-lg w-[700px]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
-            className="text-4xl font-bold text-center text-gray-800"
           >
-            Looking to diagnose your HVAC unit? Let us help!
-          </motion.h1>
-          {isTextVisible && (
+            <h1 className="text-white text-2xl font-bold mb-4 text-center">
+              Looking to diagnose your HVAC unit? Let us help!
+            </h1>
+            <p className="text-xl text-white text-center mb-6">
+              Get guided troubleshooting with step-by-step instructions, connect with certified technicians, or schedule a service call right from our app.
+            </p>
+
+            <div className="flex justify-around mb-6">
+              <div className="flex flex-col items-center">
+                <FontAwesomeIcon icon={faTools} className="text-teal-500 text-4xl mb-2" />
+                <span className="text-white text-lg">Diagnostics</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <FontAwesomeIcon icon={faVideo} className="text-teal-500 text-4xl mb-2" />
+                <span className="text-white text-lg">Virtual Help</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <FontAwesomeIcon icon={faWrench} className="text-teal-500 text-4xl mb-2" />
+                <span className="text-white text-lg">Technician Access</span>
+              </div>
+            </div>
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              className="text-center"
+              initial={{ x: -1000 }}
+              animate={{ x: 0 }}
               transition={{ duration: 1 }}
-              className="mt-4"
             >
               <button
                 onClick={() => navigate('/air-conditioning/diag')}
                 className="px-6 py-3 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700 transition-colors duration-200"
               >
-                GET STARTED
+                Get Started
+                <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
               </button>
             </motion.div>
-          )}
-        </motion.div>
+          </motion.div>
+        </div>
+
+        <Wave /> 
       </div>
-      <Wave /> {/* Add the Wave component here */}
     </div>
   );
 };

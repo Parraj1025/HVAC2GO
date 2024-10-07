@@ -50,7 +50,7 @@ html, body {
   overflow: hidden; /* To ensure the wave doesn't overflow */
 }
 
-.logo-container {
+/* .logo-container {
   position: absolute;
   top: 4rem;
   left: 0;
@@ -61,9 +61,9 @@ html, body {
 }
 
 .logo {
-  width: 30rem; /* Increased size */
-  height: auto; /* Maintain aspect ratio */
-}
+  width: 30rem;
+  height: auto; 
+} */
 
 .main-title {
   font-size: 2.25rem; /* Tailwind's text-4xl */
@@ -134,7 +134,7 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000; /* Ensure it's above everything else */
+  z-index: 1000; 
 }
 
 .navbar a {
@@ -166,7 +166,7 @@ input:focus {
 }
 /* Ensure the form container has a background color */
 .form-container {
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  background-color: rgba(255, 255, 255, 0.9); 
   padding: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -185,7 +185,7 @@ input:focus {
   box-sizing: border-box;
   font-size: 1rem;
 }
-/* src/App.css or another global stylesheet */
+
 .popup-container {
   position: fixed;
   top: 0;
