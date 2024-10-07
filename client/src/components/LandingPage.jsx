@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
-import Wave from './Wave'; // Ensure you import the Wave component
+import Wave from './Wave'; 
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTools, faVideo, faWrench, faArrowRight, faUser } from '@fortawesome/free-solid-svg-icons';

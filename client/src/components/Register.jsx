@@ -13,7 +13,7 @@ const Register = () => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  // Use the appropriate API URL from environment variables
+  
   const apiUrl = import.meta.env.VITE_API_URL; // This will pull from /client/.env
 
   const handleChange = (e) => {
