@@ -68,7 +68,7 @@ const LandingPage = () => {
       <nav className="navbar flex items-center bg-gray-800 overflow-hidden" style={{ padding: '0.5rem 1rem', height: '60px' }}>
         <Link to="/" className="flex items-center">
           <img
-            src="/images/officiallogo7.png"
+            src="/images/officiallogo.png"
             alt="Logo"
             className="h-24 max-h-full w-auto"
             style={{ transform: 'translateY(10px)' }}  

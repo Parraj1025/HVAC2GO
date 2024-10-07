@@ -73,8 +73,9 @@ function Diagnostic() {
       {/* Navigation Bar */}
       <nav className="navbar w-full flex justify-between items-center mb-8 py-2" style={{ height: '60px' }}>
         <div className="flex items-center">
-          <Link to="/" className="text-white text-lg font-bold">Home</Link>
-          <img src="/images/hvacfan.png" alt="Logo" className="h-12 w-12 ml-4" />
+          <Link to="/" className="flex items-center">
+            <img src="/images/officiallogo.png" alt="Logo" className="h-24 max-h-full w-auto" />
+          </Link>
         </div>
         <div>
           {user ? (
