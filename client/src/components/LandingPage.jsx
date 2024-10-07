@@ -66,10 +66,9 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <nav className="navbar flex items-center bg-gray-800 overflow-hidden" style={{ padding: '0.5rem 1rem', height: '60px' }}>
-       
         <Link to="/" className="flex items-center">
           <img
-            src="/images/officiallogo4.png"
+            src="/images/officiallogo7.png"
             alt="Logo"
             className="h-24 max-h-full w-auto"
             style={{ transform: 'translateY(10px)' }}  
@@ -169,6 +168,16 @@ const LandingPage = () => {
                 <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
               </button>
             </motion.div>
+
+            {/* App Store and Google Play badges */}
+            <div className="flex justify-center mt-8">
+              <a href="IOS_APP_URL" target="_blank" rel="noopener noreferrer">
+                <img src="/images/ioslogo1.png" alt="Download on the App Store" className="h-12 mx-2" />
+              </a>
+              <a href="ANDROID_APP_URL" target="_blank" rel="noopener noreferrer">
+                <img src="/images/androidlogo.png" alt="Get it on Google Play" className="h-12 mx-2" />
+              </a>
+            </div>
           </motion.div>
         </div>
 
