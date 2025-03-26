@@ -1,3 +1,4 @@
+// src/components/LandingPage.jsx
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
@@ -65,15 +66,31 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      <nav className="navbar flex items-center bg-gray-800 overflow-hidden" style={{ padding: '0.5rem 1rem', height: '60px' }}>
-        <Link to="/" className="flex items-center">
-          <img
-            src="/images/officiallogo.png"
-            alt="Logo"
-            className="h-24 max-h-full w-auto"
-            style={{ transform: 'translateY(10px)' }}  
-          />
-        </Link>
+      <nav className="navbar flex items-center justify-between bg-gray-800 overflow-hidden px-4 md:px-8" style={{ padding: '0.5rem 1rem', height: '60px' }}>
+        <div className="flex items-center">
+          <Link to="/" className="flex items-center">
+            <img
+              src="/images/officiallogo.png"
+              alt="Logo"
+              className="h-24 max-h-full w-auto"
+              style={{ transform: 'translateY(10px)' }}  
+            />
+          </Link>
+          
+          {/* Navigation Links */}
+          <div className="hidden md:flex ml-10">
+            <Link to="/about" className="text-white mx-3 hover:text-teal-400 transition-colors">
+              About
+            </Link>
+            <Link to="/contact" className="text-white mx-3 hover:text-teal-400 transition-colors">
+              Contact
+            </Link>
+            <Link to="/services" className="text-white mx-3 hover:text-teal-400 transition-colors">
+              Services
+            </Link>
+          </div>
+        </div>
+
         <div>
           {user ? (
             <div className="relative" ref={dropdownRef}>
@@ -110,10 +127,10 @@ const LandingPage = () => {
             </div>
           ) : (
             <>
-              <Link to="/login" className="text-white mx-2">
+              <Link to="/login" className="text-white mx-2 hover:text-teal-400 transition-colors">
                 Login
               </Link>
-              <Link to="/register" className="text-white mx-2">
+              <Link to="/register" className="text-white mx-2 hover:text-teal-400 transition-colors">
                 Register
               </Link>
             </>
@@ -160,28 +177,28 @@ const LandingPage = () => {
               animate={{ x: 0 }}
               transition={{ duration: 1 }}
             >
-              <button
-                onClick={() => navigate('/air-conditioning/diag')}
-                className="px-6 py-3 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700 transition-colors duration-200"
+              <Link 
+                to="/services" 
+                className="px-6 py-3 text-lg font-medium text-white bg-teal-500 rounded hover:bg-teal-700 transition-colors duration-200 inline-block"
               >
-                Get Started
+                Start Diagnosis
                 <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
-              </button>
+              </Link>
             </motion.div>
 
             {/* App Store and Google Play badges */}
             <div className="flex justify-center mt-8">
-              <a href="IOS_APP_URL" target="_blank" rel="noopener noreferrer">
+              <a href="IOS_APP_URL" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-105">
                 <img src="/images/ioslogo1.png" alt="Download on the App Store" className="h-12 mx-2" />
               </a>
-              <a href="ANDROID_APP_URL" target="_blank" rel="noopener noreferrer">
+              <a href="ANDROID_APP_URL" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-105">
                 <img src="/images/androidlogo.png" alt="Get it on Google Play" className="h-12 mx-2" />
               </a>
             </div>
           </motion.div>
         </div>
 
-        <Wave /> 
+        <Wave />
       </div>
     </div>
   );
