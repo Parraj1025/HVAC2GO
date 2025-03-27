@@ -1,6 +1,7 @@
-// src/App.jsx
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
+import MobileLandingPage from './components/MobileLandingPage';
 import Diagnostic from './components/Diagnostic';
 import NotRunning from './components/NotRunning';
 import OutsideRunning from './components/OutsideRunning';
@@ -15,11 +16,31 @@ import Contact from './components/Contact';
 import Services from './components/Services';
 
 function App() {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    // Function to check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   return (
     <Router>
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={isMobile ? <MobileLandingPage /> : <LandingPage />} />
         <Route path="/air-conditioning/diag" element={<Diagnostic />} />
         <Route path="/air-conditioning/diag2" element={<NotRunning />} />
         <Route path="/air-conditioning/diag3" element={<InsideRunning />} />
