@@ -1,0 +1,232 @@
+.mobile-about-container {
+    min-height: 100vh;
+    height: auto;
+    background: linear-gradient(to bottom right, white, #14b8a6);
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    /* Remove the extra padding at the bottom */
+    padding-bottom: 0;
+  }
+  
+  .mobile-about-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1f2937;
+    padding: 0.5rem 1rem;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    overflow: hidden;
+  }
+  
+  .mobile-about-logo {
+    height: 24px;
+    max-height: full;
+    width: auto;
+    transform: translateY(10px);
+  }
+  
+  .mobile-about-menu-button {
+    color: white;
+    padding: 0.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .mobile-about-menu-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(31, 41, 55, 0.95);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mobile-about-close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: white;
+    font-size: 1.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .mobile-about-menu-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .mobile-about-menu-link {
+    color: white;
+    font-size: 1.25rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .mobile-about-menu-link.active {
+    color: #14b8a6;
+  }
+  
+  .mobile-about-menu-link:hover {
+    color: #14b8a6;
+  }
+  
+  .mobile-about-content {
+    position: relative;
+    width: 100%;
+    width: 420px;
+    height: 220px;
+    /* Add margin-top to create space between navbar and first card */
+    margin-top: 30px;
+  }
+  
+  .mobile-about-card {
+    background: linear-gradient(to right, black, #14b8a6);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    border: 1px solid #374151;
+    margin-bottom: 2rem;
+  }
+  
+  .mobile-about-card-title {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .mobile-about-card-subtitle {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    text-align: center;
+  }
+  
+  .mobile-about-card-text {
+    color: white;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .mobile-about-features {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 0.5rem;
+  }
+  
+  .mobile-about-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mobile-about-feature-icon {
+    color: #14b8a6;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .mobile-about-feature-text {
+    color: white;
+    font-size: 0.875rem;
+  }
+  
+  .mobile-about-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .mobile-about-step {
+    text-align: center;
+  }
+  
+  .mobile-about-step-number {
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 0.75rem;
+  }
+  
+  .mobile-about-step-number-text {
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .mobile-about-step-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: white;
+  }
+  
+  .mobile-about-step-description {
+    color: white;
+    font-size: 0.875rem;
+  }
+  
+  .mobile-about-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .mobile-about-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  
+  .mobile-about-section-icon {
+    color: white;
+    margin-right: 0.5rem;
+  }
+  
+  .mobile-about-list {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    color: white;
+    gap: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.875rem;
+  }
+  
+  .mobile-about-app-badges {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    /* Reduce bottom margin to remove extra space */
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+  }
+  
+  .mobile-about-app-badge {
+    margin: 0 0.5rem;
+  }
+  
+  .mobile-about-app-badge-img {
+    height: 2.5rem;
+  }
+  
