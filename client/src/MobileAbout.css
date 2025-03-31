@@ -95,10 +95,14 @@
     padding: 1.5rem;
     border-radius: 0.75rem;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    width: 100%;
+    width: 90%;
+    max-width: 380px;
     border: 1px solid #374151;
     margin-bottom: 2rem;
+    margin-left: auto;
+    margin-right: auto;
   }
+  
   
   .mobile-about-card-title {
     color: white;
@@ -128,10 +132,18 @@
     margin-bottom: 0.5rem;
   }
   
+  .mobile-about-features {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0 5px;
+  }
+  
   .mobile-about-feature {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 32%;
   }
   
   .mobile-about-feature-icon {
@@ -142,7 +154,9 @@
   
   .mobile-about-feature-text {
     color: white;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
+    text-align: center;
+    white-space: nowrap;
   }
   
   .mobile-about-steps {
@@ -187,6 +201,7 @@
   
   .mobile-about-section {
     margin-bottom: 1.5rem;
+
   }
   
   .mobile-about-section-title {
